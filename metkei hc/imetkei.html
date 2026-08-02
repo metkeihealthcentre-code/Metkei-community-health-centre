@@ -86,27 +86,31 @@
             flex-direction: column;
         }
 
-        /* Hero / Dashboard Section */
+        /* Hero / Dynamic Image Slider Section */
         .hero {
             background: #f4f9f4;
             text-align: center;
         }
-        .carousel-container {
+        .slider-wrapper {
+            position: relative;
             width: 100%;
             height: 50vh;
-            min-height: 300px;
+            min-height: 500px;
+            overflow: hidden;
             background: #e2eee2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
-        .carousel-placeholder {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 8px;
-            max-width: 550px;
-            border: 2px dashed #28a745;
+        .slide-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .slide-img.visible-slide {
+            opacity: 1;
         }
         .hero-text {
             padding: 25px 15px;
@@ -131,13 +135,22 @@
         .about-story p {
             margin-bottom: 15px;
         }
+        .partner-highlight-box {
+            background: #f4f9f4;
+            border-left: 4px solid #1e7e34;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 15px;
+            border-radius: 0 6px 6px 0;
+        }
 
-        /* Partners Responsive Grid */
+        /* Partners Responsive Grid & Detail Cards */
         .partners-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 10px;
+            margin-bottom: 30px;
         }
         .partner-card-link {
             text-decoration: none;
@@ -152,12 +165,35 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.04);
             height: 100%;
+            transition: transform 0.2s;
+        }
+        .partner-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,86,179,0.15);
         }
         .partner-card h3 {
             color: #1e7e34;
             margin-bottom: 8px;
             font-size: 18px;
             text-decoration: underline;
+        }
+        .partner-detail-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #28a745;
+        }
+        .detail-card {
+            background: #ffffff;
+            border: 1px solid #e2eee2;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            scroll-margin-top: 80px;
+        }
+        .detail-card h4 {
+            color: #0056b3;
+            font-size: 20px;
+            margin-bottom: 8px;
         }
 
         /* Services Responsive Grid */
@@ -252,7 +288,7 @@
             background: #1e7e34;
             color: #ffffff;
             text-align: center;
-            padding: 15px 0;
+            padding: 8px 0;
             margin-top: auto;
             font-size: 14px;
         }
@@ -269,11 +305,8 @@
                 font-size: 13px;
                 padding: 4px 8px;
             }
-            .carousel-container {
+            .slider-wrapper {
                 height: 40vh;
-            }
-            .carousel-placeholder h2 {
-                font-size: 20px;
             }
             .hero-text h2 {
                 font-size: 22px;
@@ -310,12 +343,12 @@
     <!-- 3. Dynamic Tab Space -->
     
     <!-- HOME SECTION -->
-    <div id="section-home" class="tab-content active-section hero">
-        <div class="carousel-container">
-            <div class="carousel-placeholder">
-                <h2 style="color: #1e7e34; font-size: 22px; margin-bottom: 8px;">[ Hospital Dashboard Pictures Area ]</h2>
-                <p style="color: #444; font-size: 14px;">This section adjusts dynamically to match laptop monitors or phone displays seamlessly, housing your sliding images cleanly.</p>
-            </div>
+    <div id="section-home" class="tab-content hero active-section">
+        <div class="slider-wrapper">
+            <img src="medicalcamp.jpg" alt="Outreach medical camps" class="slide-img visible-slide">
+            <img src="GD.jpg" alt="Medical shelter foundation" class="slide-img">
+            <img src="CHP.jpg" alt="New hospital infrastructure" class="slide-img">
+            <img src="BC_screen.jpg" alt="Future health developments" class="slide-img">
         </div>
         <div class="hero-text">
             <div class="container">
@@ -329,43 +362,82 @@
     <section id="section-about" class="tab-content">
         <div class="container">
             <div class="about-story">
-                <p>Our journey began back in <strong>2015</strong> as a critical medical outreach initiative, returning annually to run <strong>free medical camps</strong> and provide desperate care to the local community. This regular outreach continued faithfully until the arrival of COVID-19 in <strong>2021</strong>, when necessary bans on public gatherings disrupted our mobile service style.</p>
+                <p>Our journey began back in <strong>2015</strong> as a critical medical outreach initiative, returning annually to run <strong>free medical camps</strong> and provide treatment relief directly to the local community. This regular outreach continued faithfully until the arrival of COVID-19 in <strong>2021</strong>, when necessary bans on public gatherings disrupted our mobile service style.</p>
                 
                 <p>Rather than stopping, this challenge highlighted a deeper need: a permanent shelter and treatment foundation for identified patients. To fulfill this vision, <strong>German Doctors</strong> stepped forward to support our community, purchasing dedicated land and financing the construction of a permanent facility layout.</p>
                 
+                <div class="partner-highlight-box">
+                    <strong>About Our Partner (German Doctors):</strong> Founded in 1983, German Doctors sends medical professionals on voluntary six-week missions to medically underserved areas globally—primarily across Kenya, India, Bangladesh, Sierra Leone, and the Philippines. Operating in severe poverty areas, refugee camps, and civil rescue environments, they provide critical basic medical care and train local healthcare personnel. To date, over 3,500 doctors have executed roughly 7,700 missions, generating over 13 million patient contacts worldwide.
+                </div>
+
                 <p>Construction moved forward seamlessly, culminating in the completion of our modern hospital framework by <strong>January 2025</strong>. Today, Metkei Community Health Centre is fully operational—built for the community, run by the community, and managed locally by our dedicated directors, continuing our core tradition of targeted local outreach.</p>
             </div>
         </div>
     </section>
 
-    <!-- OUR PARTNERS SECTION -->
+    <!-- OUR PARTNERS SECTION (Set to Active Default) -->
     <section id="section-partners" class="tab-content" style="background-color: #f9f9f9;">
         <div class="container">
+            <!-- Grid of Partners -->
             <div class="partners-grid">
                 <a href="#ampath-details" class="partner-card-link">
                     <div class="partner-card">
                         <h3>AMPATH</h3>
-                        <p>Provides crucial technical support, management expertise for chronic conditions like HIV, Hypertension, and Diabetes, and ensures consistent drug access via a specialized revolving funds pharmacy model.</p>
+                        <p>Provides crucial technical support, management expertise for chronic conditions, and ensures consistent drug access via a specialized revolving funds pharmacy model.</p>
                     </div>
                 </a>
                 <a href="#german-doctors-details" class="partner-card-link">
                     <div class="partner-card">
                         <h3>German Doctors</h3>
-                        <p>Funded our structural baseline mission from the ground up, purchasing the physical land plot and funding construction for our Outpatient Department (OPD) clinic rooms.</p>
+                        <p>Funded our structural baseline mission from the ground up, purchasing the physical land plot and funding construction for our clinic layout framework.</p>
+                    </div>
+                </a>
+                <a href="#ucsf-details" class="partner-card-link">
+                    <div class="partner-card" style="border-top-color: #28a745;">
+                        <h3>UCSF</h3>
+                        <p>University of California, San Francisco—a top public research institution entirely dedicated to advanced health science and global life science innovation.</p>
                     </div>
                 </a>
                 <a href="#county-details" class="partner-card-link">
                     <div class="partner-card">
                         <h3>County Government</h3>
-                        <p>The County Department of Health coordinates essential policy leadership and healthcare guidance while supplying vital vaccines, clinical tablets, and regular medical mentorship.</p>
+                        <p>The County Department of Health coordinates essential policy leadership, vaccines, clinical equipment tools, and medical mentorship.</p>
                     </div>
                 </a>
                 <a href="#community-details" class="partner-card-link">
                     <div class="partner-card">
                         <h3>The Community</h3>
-                        <p>Local community members drive our governing leadership structure while actively utilizing our treatment services, ensuring lasting grassroots ownership and long-term facility sustainability.</p>
+                        <p>Local community members drive our governing leadership structure while actively utilizing our treatment services, ensuring lasting grassroots ownership.</p>
                     </div>
                 </a>
+            </div>
+
+            <!-- Detailed Target Sections -->
+            <div class="partner-detail-section">
+                <div id="ampath-details" class="detail-card">
+                    <h4>AMPATH</h4>
+                    <p>AMPATH works closely with our health centre to provide management expertise for chronic health conditions including HIV, Hypertension, and Diabetes. Their revolving pharmacy system guarantees that essential medications remain continually stocked and accessible to our community patients.</p>
+                </div>
+
+                <div id="german-doctors-details" class="detail-card">
+                    <h4>German Doctors</h4>
+                    <p>German Doctors funded our structural baseline project from the ground up, purchasing the physical land plot and funding the construction of our main Outpatient Department (OPD) clinic rooms, paving the way for our transition into a permanent treatment center.</p>
+                </div>
+
+                <div id="ucsf-details" class="detail-card">
+                    <h4>University of California, San Francisco (UCSF)</h4>
+                    <p>The University of California, San Francisco is a prestigious public land-grant research university dedicated entirely to health science and life science. Founded as Toland Medical College in 1864 and affiliated with the University of California system since 1873, UCSF stands as a powerhouse of medical exploration. In 2021, the institution spent $1.71 billion in advanced research and development, receiving the second-highest research funding allocation from the National Institutes of Health (NIH). UCSF's elite medical faculty have treated patients and trained healthcare residents for over a century, enriching our community medical programs with global healthcare research depth.</p>
+                </div>
+
+                <div id="county-details" class="detail-card">
+                    <h4>County Government</h4>
+                    <p>The County Department of Health delivers coordinating policy leadership and healthcare guidance while supplying our institution with vital diagnostic tools, child health vaccines, electronic tracking systems, and routine clinical oversight.</p>
+                </div>
+
+                <div id="community-details" class="detail-card">
+                    <h4>The Community</h4>
+                    <p>Metkei residents constitute the true owners and foundational pillars of our center. The community directly votes for and supplies members of our Governing Board of Directors, keeping local needs at the absolute core of our daily operations.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -390,7 +462,6 @@
                     <h3>Specialized & Community Care</h3>
                     <p>Point-of-Care Ultrasound diagnostics and active community health outreach via Community Health Promoter (CHPs) services.</p>
                 </div>
-                <!-- Newly added grid item for your free medical camps -->
                 <div class="service-card" style="border-top-color: #0056b3;">
                     <h3 style="color: #28a745;">Free Medical Camps</h3>
                     <p>Organizing strategic, zero-cost medical outreach camps to deliver specialized checkups, screening, and diagnostic relief directly to community doorsteps.</p>
@@ -434,7 +505,7 @@
     <section id="section-contact" class="tab-content">
         <div class="container">
             <div class="contact-info">
-                <p style="margin: 6px 0;"><strong>Location:</strong> Metkei, Kenya</p>
+                <p style="margin: 3px 0;"><strong>Location:</strong> Metkei, Kenya</p>
                 <p style="margin: 6px 0;"><strong>Email:</strong> <a href="mailto:metkeihealthcentre@gmail.com">metkeihealthcentre@gmail.com</a></p>
                 <p style="margin: 6px 0; color: #0056b3;"><strong>Phone:</strong> [Phone Number Placeholder]</p>
             </div>
@@ -446,7 +517,7 @@
         <p>&copy; 2026 Metkei Community Health Centre. All Rights Reserved.</p>
     </footer>
 
-    <!-- Tab View Execution Logic -->
+    <!-- Tab View Execution & Slider Rotator Logic -->
     <script>
         function switchTab(sectionId) {
             const sections = document.querySelectorAll('.tab-content');
@@ -463,6 +534,19 @@
             document.getElementById('nav-' + sectionId).classList.add('active');
             window.scrollTo(0, 0);
         }
+
+        // Automatic fading background slider machine
+        let currentSlideIndex = 0;
+        const hospitalSlides = document.querySelectorAll('.slide-img');
+        
+        function autoRotateSlides() {
+            hospitalSlides[currentSlideIndex].classList.remove('visible-slide');
+            currentSlideIndex = (currentSlideIndex + 1) % hospitalSlides.length;
+            hospitalSlides[currentSlideIndex].classList.add('visible-slide');
+        }
+        
+        // Rotates to the next image automatically every 4 seconds
+        setInterval(autoRotateSlides, 4000);
     </script>
 </body>
 </html>
